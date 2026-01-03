@@ -1,0 +1,73 @@
+import { useState } from 'react';
+import { Plus, Clock, Pencil } from 'lucide-react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+
+export function TimetableScreen() {
+  const [classes] = useState([
+    { id: 1, subject: 'Mathematics', time: '09:00 AM - 10:30 AM', color: 'bg-primary', day: 'Monday' },
+    { id: 2, subject: 'Physics', time: '11:00 AM - 12:30 PM', color: 'bg-secondary', day: 'Monday' },
+    { id: 3, subject: 'Chemistry', time: '02:00 PM - 03:30 PM', color: 'bg-accent', day: 'Monday' },
+    { id: 4, subject: 'English', time: '09:00 AM - 10:30 AM', color: 'bg-primary', day: 'Tuesday' },
+    { id: 5, subject: 'Computer Science', time: '11:00 AM - 12:30 PM', color: 'bg-accent', day: 'Tuesday' },
+    { id: 6, subject: 'Biology', time: '02:00 PM - 03:30 PM', color: 'bg-secondary', day: 'Tuesday' },
+  ]);
+
+  return (
+    <div className="pb-24 pt-6 px-4 space-y-4 overflow-y-auto" style={{ height: 'calc(100vh - 5rem)' }}>
+      {/* Header */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold mb-1">Class Timetable</h2>
+        <p className="text-muted-foreground text-sm">Manage your weekly schedule</p>
+      </div>
+
+      {/* Classes List */}
+      <div className="space-y-4">
+        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => {
+          const dayClasses = classes.filter((c) => c.day === day);
+          
+          return (
+            <div key={day}>
+              <h3 className="font-semibold mb-3 text-sm text-muted-foreground uppercase tracking-wide">
+                {day}
+              </h3>
+              <div className="space-y-2">
+                {dayClasses.length > 0 ? (
+                  dayClasses.map((classItem) => (
+                    <Card key={classItem.id} className="p-4 rounded-xl">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-1 h-16 ${classItem.color} rounded-full`} />
+                        <div className="flex-1">
+                          <h4 className="font-semibold">{classItem.subject}</h4>
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
+                            <Clock className="w-4 h-4" />
+                            <span>{classItem.time}</span>
+                          </div>
+                        </div>
+                        <Button variant="ghost" size="sm" className="rounded-lg">
+                          <Pencil className="w-4 h-4 text-muted-foreground" />
+                        </Button>
+                      </div>
+                    </Card>
+                  ))
+                ) : (
+                  <Card className="p-4 rounded-xl bg-muted">
+                    <p className="text-sm text-muted-foreground text-center">No classes scheduled</p>
+                  </Card>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Floating Add Button */}
+      <Button
+        className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg"
+        size="icon"
+      >
+        <Plus className="w-6 h-6" />
+      </Button>
+    </div>
+  );
+}
