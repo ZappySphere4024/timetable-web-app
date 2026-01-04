@@ -41,12 +41,12 @@ export function LeaderboardScreen() {
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Your Rank</p>
-              <p className="text-2xl font-bold text-primary">#11</p>
+              <p className="text-2xl font-bold text-primary">#1</p>
             </div>
           </div>
           <div className="text-right">
             <p className="text-sm text-muted-foreground">Total Points</p>
-            <p className="text-2xl font-bold">720</p>
+            <p className="text-2xl font-bold">1250</p>
           </div>
         </div>
       </Card>
